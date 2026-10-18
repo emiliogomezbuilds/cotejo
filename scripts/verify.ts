@@ -2,7 +2,7 @@
 import { readdirSync, readFileSync, statSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { CATALOG, CATALOG_VERSION, SOFTWARE, SOFTWARE_IDS, type Req } from "../lib/catalog";
-import { budgetStatus, checkSoftware, evaluate, runCheck } from "../lib/engine";
+import { budgetStatus, checkSoftware, runCheck } from "../lib/engine";
 import { EMPTY_SPECS, changedFields, coerceSpecs, declaredFields, type Specs } from "../lib/specs";
 import { parseIntake, parseVision } from "../lib/ai";
 import { PRESSURE_PATTERNS, SELLER_PATTERNS, isNeutral } from "../lib/wording";

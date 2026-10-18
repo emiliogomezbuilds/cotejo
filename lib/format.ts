@@ -11,3 +11,9 @@ export function formatMx(iso: string | Date): string {
     hourCycle: "h23", // 24h clock: "20:47". "p.m." ends in a period and doubled up with the sentence.
   });
 }
+
+/** "2026-10-18" -> "18 de octubre de 2026" without any timezone shifting. */
+export function formatDate(isoDay: string): string {
+  const [y, m, d] = isoDay.split("-").map(Number);
+  return new Date(Date.UTC(y, m - 1, d)).toLocaleDateString("es-MX", { timeZone: "UTC", day: "numeric", month: "long", year: "numeric" });
+}

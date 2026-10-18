@@ -92,3 +92,11 @@ export function changedFields(proposed: Specs, confirmed: Specs): number {
   const keys = Object.keys(EMPTY_SPECS) as (keyof Specs)[];
   return keys.filter((k) => proposed[k] !== confirmed[k]).length;
 }
+
+const known = (v: unknown) => v !== null && v !== "unknown";
+/** Overlay `add` on `base`, keeping base values wherever `add` is unknown. */
+export function mergeSpecs(base: Specs, add: Specs): Specs {
+  const out = { ...base } as Record<string, unknown>;
+  (Object.keys(add) as (keyof Specs)[]).forEach((k) => { if (known(add[k])) out[k] = add[k]; });
+  return out as Specs;
+}
