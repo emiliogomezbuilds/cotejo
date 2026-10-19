@@ -2,7 +2,7 @@
 
 ## Session 1 (2026-10-18): packet, then build
 - **Slice:** the Team 8 Blueprint, Technologist lens. Vacuum: Regret Prevention. A first-year Mexican university student looking at a laptop listing compares what she declares about the laptop with the published requirements of the software her degree needs. Not a store, not a recommendation engine.
-- **Name:** Cotejo ("to compare against a source"). Chosen by Emilio after he rejected the first name.
+- **Name:** Cotejo ("to compare against a source"). Emilio asked for alternatives (including something like "funds" in Spanish), then decided to keep Cotejo.
 - **Packet before code:** `docs/PACKET.md` is the first commit (0ce30f5). Every code commit comes after it.
 - **Declaration honored:** a deterministic, source-backed checker (Blueprint Condition 1). The app works with no AI at all.
 - **Three states, never a grade:** every requirement is `meets`, `does_not_meet` or `cannot_decide`; `below_recommended` is shown separately as information. Unknown input is never a failure. There is no overall score, no ranking and no "good laptop" label, and "no evidence loaded" is worded differently from "does not meet".
