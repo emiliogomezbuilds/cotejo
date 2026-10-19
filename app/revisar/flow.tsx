@@ -84,6 +84,13 @@ export function ReviewFlow() {
     return (
       <div className="mt-4 space-y-6">
         <ReportView report={result.report} sample={result.isSample} />
+        {result.specs.os === "unknown" ? (
+          <div role="alert" className="space-y-3 rounded border border-amber-400 bg-amber-50 p-4">
+            <p className="font-semibold">Falta un dato para poder revisar: el sistema operativo.</p>
+            <p className="text-sm text-slate-700">Casi siempre viene en la ficha del anuncio (por ejemplo «Windows 11 Home» o «macOS»). Sin ese dato, Cotejo no puede comparar nada, y no lo trata como fallo.</p>
+            <Button type="button" onClick={() => { setShowResult(false); setTimeout(() => document.querySelector<HTMLSelectElement>('select[name="os"]')?.focus(), 50); }}>Elegir el sistema operativo</Button>
+          </div>
+        ) : (
         <form action={save} className="space-y-3 rounded border bg-white p-4">
           <h2 className="font-semibold">¿Quieres guardar esta revisión?</h2>
           <p className="text-sm text-slate-600">Es opcional. Guardamos tus datos declarados y los resultados, ligados a la versión del catálogo. No guardamos capturas ni el texto que escribiste.</p>
@@ -107,6 +114,7 @@ export function ReviewFlow() {
             <Button type="button" variant="outline" onClick={() => setShowResult(false)}>Cambiar datos</Button>
           </div>
         </form>
+        )}
       </div>
     );
   }
@@ -131,7 +139,7 @@ export function ReviewFlow() {
           ))}
         </div>
         <label className="block text-sm font-medium">Tu presupuesto en pesos (opcional)
-          <input name="budgetMxn" inputMode="numeric" value={budget} onChange={(e) => setBudget(e.target.value)} placeholder="18000" className="mt-1 block w-full rounded border p-2" />
+          <input name="budgetMxn" inputMode="numeric" value={budget} onChange={(e) => setBudget(e.target.value)} placeholder="ej. 18000" className="mt-1 block w-full rounded border p-2" />
         </label>
       </fieldset>
 
@@ -165,10 +173,10 @@ export function ReviewFlow() {
         </label>
         <div className="grid gap-3 sm:grid-cols-2">
           <label className="block text-sm font-medium">Memoria RAM (GB){aiBadge("ramGb")}
-            <input name="ramGb" inputMode="decimal" value={f.ramGb} onChange={(e) => set("ramGb", e.target.value)} placeholder="16" className={`mt-1 block w-full rounded border p-2 ${mark("ramGb")}`} />
+            <input name="ramGb" inputMode="decimal" value={f.ramGb} onChange={(e) => set("ramGb", e.target.value)} placeholder="ej. 16" className={`mt-1 block w-full rounded border p-2 ${mark("ramGb")}`} />
           </label>
           <label className="block text-sm font-medium">Almacenamiento total (GB; 1 TB = 1000){aiBadge("storageGb")}
-            <input name="storageGb" inputMode="decimal" value={f.storageGb} onChange={(e) => set("storageGb", e.target.value)} placeholder="512" className={`mt-1 block w-full rounded border p-2 ${mark("storageGb")}`} />
+            <input name="storageGb" inputMode="decimal" value={f.storageGb} onChange={(e) => set("storageGb", e.target.value)} placeholder="ej. 512" className={`mt-1 block w-full rounded border p-2 ${mark("storageGb")}`} />
           </label>
         </div>
         <label className="block text-sm font-medium">Gráficos{aiBadge("gpuKind")}
@@ -178,11 +186,11 @@ export function ReviewFlow() {
         </label>
         {f.gpuKind === "dedicated" && (
           <label className="block text-sm font-medium">Memoria de la tarjeta dedicada (GB){aiBadge("vramGb")}
-            <input name="vramGb" inputMode="decimal" value={f.vramGb} onChange={(e) => set("vramGb", e.target.value)} placeholder="4" className={`mt-1 block w-full rounded border p-2 ${mark("vramGb")}`} />
+            <input name="vramGb" inputMode="decimal" value={f.vramGb} onChange={(e) => set("vramGb", e.target.value)} placeholder="ej. 4" className={`mt-1 block w-full rounded border p-2 ${mark("vramGb")}`} />
           </label>
         )}
         <label className="block text-sm font-medium">Precio del anuncio en pesos (opcional){aiBadge("priceMxn")}
-          <input name="priceMxn" inputMode="numeric" value={f.priceMxn} onChange={(e) => set("priceMxn", e.target.value)} placeholder="17499" className={`mt-1 block w-full rounded border p-2 ${mark("priceMxn")}`} />
+          <input name="priceMxn" inputMode="numeric" value={f.priceMxn} onChange={(e) => set("priceMxn", e.target.value)} placeholder="ej. 17499" className={`mt-1 block w-full rounded border p-2 ${mark("priceMxn")}`} />
         </label>
       </fieldset>
 

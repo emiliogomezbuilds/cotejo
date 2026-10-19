@@ -121,6 +121,7 @@ export async function saveCheckAction(_prev: SaveState, fd: FormData): Promise<S
   const budgetRaw = fd.get("budgetMxn");
   const budgetMxn = typeof budgetRaw === "string" && budgetRaw.trim() ? pesos(budgetRaw) : null;
   const specs = specsFrom(fd);
+  if (specs.os === "unknown") return { error: "Falta el sistema operativo: sin ese dato no hay nada que guardar." };
   const proposed = proposedFrom(fd);
   const report = runCheck(software, specs, budgetMxn); // never taken from the client
   const titleDefault = `Laptop ${platformOf(specs.os) === "macos" ? "macOS" : platformOf(specs.os) === "windows" ? "Windows" : ""} · ${software.map(swName).join(", ")}`.replace(/\s+/g, " ").slice(0, 80);
