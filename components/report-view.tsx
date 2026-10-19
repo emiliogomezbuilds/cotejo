@@ -37,6 +37,25 @@ export function ReportView({ report, sample, canReport = true }: { report: Check
         </ul>
       </div>
 
+      {report.reports.length > 0 && (
+        <nav aria-label="Resumen por programa" className="rounded border border-slate-300 bg-white p-4 text-sm">
+          <h2 className="font-semibold">Resumen por programa</h2>
+          <ul className="mt-2 space-y-1">
+            {report.reports.map((r) => (
+              <li key={r.software}>
+                <a href={`#sw-${r.software}`} className="font-medium text-blue-800 underline">{swName(r.software)}</a>
+                {r.noEvidence || r.results.length === 0
+                  ? <span className="text-slate-600"> · no se pudo revisar</span>
+                  : <span className="text-slate-600"> · {r.counts.does_not_meet} no cumple · {r.counts.meets} cumplen · {r.counts.cannot_decide} sin resolver{r.counts.below_recommended > 0 ? ` · ${r.counts.below_recommended} por debajo de lo recomendado` : ""}</span>}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-3 text-xs text-slate-600">
+            <strong>Cómo leerlo:</strong> «No cumple» es una regla del fabricante que tus datos no alcanzan. «Sin resolver» quiere decir que Cotejo no puede decidirlo con lo que declaraste: no es un fallo ni un visto bueno. «Por debajo de lo recomendado» es una sugerencia del fabricante, no un requisito. Las citas están en inglés porque así las publica el fabricante. Cotejo no te dice si comprar o no: la decisión es tuya.
+          </p>
+        </nav>
+      )}
+
       {report.reports.map((r) => (
         <section key={r.software} aria-labelledby={`sw-${r.software}`}>
           <h2 id={`sw-${r.software}`} className="text-xl font-bold">{swName(r.software)}</h2>
