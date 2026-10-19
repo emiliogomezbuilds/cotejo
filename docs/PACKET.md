@@ -145,7 +145,19 @@ Free-tier note: Google's free Gemini tier may use submitted content to improve i
 
 ### Evidence that the packet came before the code
 
-The first commit in the repository is this packet; every code commit comes after it (the commit table is filled in at the end of the build, from `git log`).
+The first commit in the repository is this packet (0ce30f5); every code commit comes after it. Table from `git log` (18 October 2026, times local):
+
+| Commit | Time | What |
+|---|---|---|
+| 0ce30f5 | 13:39 | Packet before code (this document) |
+| 9d3a0aa | 13:43 | Scaffold Next.js, Tailwind, Supabase auth plumbing |
+| 870d822 | 13:43 | Schema with RLS on every table |
+| 3709bd1 | 13:46 | Evidence catalog (5 titles, quote + URL + date) |
+| e0e1843 | 13:46 | Engine, parsers, wording scan, 374 checks |
+| e310650 | 13:50 | Server actions and pages |
+| 03b2b18 | 13:50 | README (deploy 1) |
+| 7e86670 | 22:08 | Fix: dead end when the OS is unknown (deploy 2) |
+| 6f1d38c | 22:15 | Persona fix: per-program summary and legend (deploy 3) |
 
 ## Appendix: sources read for the catalog (all on 18 October 2026)
 
